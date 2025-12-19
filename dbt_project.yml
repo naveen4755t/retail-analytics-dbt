@@ -41,5 +41,4 @@ models:
   retail_analytics:
     staging:
       +schema: STAGING
-    marts:
-      +schema: ANALYTICS
+
