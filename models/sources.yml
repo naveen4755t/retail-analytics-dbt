@@ -1,0 +1,55 @@
+version: 2
+
+sources:
+  - name: raw
+    database: RETAIL_DB
+    schema: RAW
+    tables:
+      - name: sales_data
+models:
+  - name: dim_customers
+    description: "Customer dimension table created from sales data"
+    columns:
+      - name: customer_name
+        description: "Name of the customer"
+        tests:
+          - not_null
+      - name: city
+        description: "Customer city"
+      - name: state
+        description: "Customer state"
+      - name: country
+        description: "Customer country"
+
+  - name: dim_products
+    description: "Product dimension table"
+    columns:
+      - name: product_code
+        description: "Unique product identifier"
+        tests:
+          - not_null
+          - unique
+      - name: product_line
+        description: "Product category / line"
+
+  - name: fact_orders
+    description: "Fact table containing order-level sales transactions"
+    columns:
+      - name: order_number
+        description: "Unique order number"
+        tests:
+          - not_null
+      - name: order_date
+        description: "Date when order was placed"
+      - name: customer_name
+        description: "Customer associated with the order"
+      - name: product_code
+        description: "Product sold in the order"
+      - name: quantity
+        description: "Number of units sold"
+      - name: price_each
+        description: "Price per unit"
+      - name: sales_amount
+        description: "Total sales amount for the order"
+      - name: deal_size
+        description: "Deal size classification"
